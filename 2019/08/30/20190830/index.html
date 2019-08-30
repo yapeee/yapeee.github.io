@@ -6,16 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | HMS的学习笔记</title>
+  <title>20190830 | HMS的学习笔记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta property="og:type" content="website">
-<meta property="og:title" content="HMS的学习笔记">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="下文为HMS当日开发学习过程中遇到的一些问题以及解决方案。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20190830">
+<meta property="og:url" content="http://yoursite.com/2019/08/30/20190830/index.html">
 <meta property="og:site_name" content="HMS的学习笔记">
+<meta property="og:description" content="下文为HMS当日开发学习过程中遇到的一些问题以及解决方案。">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-08-30T08:16:56.823Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HMS的学习笔记">
+<meta name="twitter:title" content="20190830">
+<meta name="twitter:description" content="下文为HMS当日开发学习过程中遇到的一些问题以及解决方案。">
   
     <link rel="alternative" href="/atom.xml" title="HMS的学习笔记" type="application/atom+xml">
   
@@ -170,86 +174,182 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-20190830" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
   
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
+    <h1 class="article-title" itemprop="name">
+      20190830
+    </h1>
+  
+
+
+  
+  
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
 <a href="/2019/08/30/20190830/" class="archive-article-date">
         <time datetime="2019-08-30T06:34:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-30</time>
 </a>
 
+  
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>下文为HMS当日开发学习过程中遇到的一些问题以及解决方案。</p>
+<a id="more"></a>
+
+<h4 id="vue-work1"><a href="#vue-work1" class="headerlink" title="vue-work1"></a>vue-work1</h4><p><em>该项目为vue项目，是工作中正在开发项目之一。</em></p>
+<h5 id="问题1-vue-router如何实现回退至指定页面，即回退n（n不确定）张页面。"><a href="#问题1-vue-router如何实现回退至指定页面，即回退n（n不确定）张页面。" class="headerlink" title="问题1 vue-router如何实现回退至指定页面，即回退n（n不确定）张页面。"></a>问题1 vue-router如何实现回退至指定页面，即回退n（n不确定）张页面。</h5><p><em>要实现在end.vue页面中点击【返回】按钮，返回至start.vue页面。其中start.vue页面-&gt; … -&gt; end.vue页面。</em></p>
+<h6 id="浅析："><a href="#浅析：" class="headerlink" title="浅析："></a>浅析：</h6><p>想要实现效果为，回退n（n不确定）张页面。我们需要获取到整个历史路由记录，然后然后返回至指定路由。<br>下面为<a href="https://router.vuejs.org/zh/guide/#html" target="_blank" rel="noopener">Vue Router</a>提供的一些方法：<br><strong><a href="https://router.vuejs.org/zh/guide/essentials/navigation.html" target="_blank" rel="noopener">编程式导航的几种方式</a></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">router.push(...) // 这个方法会向 history 栈添加一个新的记录，所以，当用户点击浏览器后退按钮时，则回到之前的 URL。</span><br><span class="line">router.replace(...) // 类似router.push，但它不会向 history 添加新记录，而是跟它的方法名一样 —— 替换掉当前的 history 记录。</span><br><span class="line">router.go(n) // 在 history 记录中向前或者后退多少步，类似 window.history.go(n)。</span><br></pre></td></tr></table></figure>
+
+<p><strong><a href="https://router.vuejs.org/zh/guide/essentials/dynamic-matching.html#%E5%93%8D%E5%BA%94%E8%B7%AF%E7%94%B1%E5%8F%82%E6%95%B0%E7%9A%84%E5%8F%98%E5%8C%96" target="_blank" rel="noopener">监测路由变化</a></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">watch: &#123;</span><br><span class="line">    &apos;$route&apos; (to, from) &#123;</span><br><span class="line">      // 对路由变化作出响应...</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h6><p>1.在App.vue组件中监听路由，将访问路由历史记录存储至数组中。<br>2.在end.vue组件中，在【返回】按钮监听事件中设置触发App.vue组件的自定义事件<code>clearRoute</code>。<br>3.在App.vue组件中监听<code>clearRoute</code>事件，根据路由数组计算得出当前页面需要返回n页面，然后执行router.go(-n)，返回至start.vue页面中。</p>
+<h6 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现:"></a>代码实现:</h6><p><strong>App.vue</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">mounted() &#123;</span><br><span class="line">      EventBus.$on(&apos;clearRoute&apos;, (page) =&gt; &#123; // 返回至指定页面</span><br><span class="line">        let num = this.list.indexOf(page) !== -1 ? this.list.indexOf(page) : 0</span><br><span class="line">        this.$router.go(num + 1 - this.list.length)</span><br><span class="line">        this.list.splice(num, this.list.length - num)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">    watch: &#123;</span><br><span class="line">      &apos;$route&apos;: &#123;</span><br><span class="line">        handler(to, from) &#123;</span><br><span class="line">          const i = this.list.findIndex((val) =&gt; (to.name === val))</span><br><span class="line">          if (i === -1) &#123;</span><br><span class="line">            this.list.push(to.name)</span><br><span class="line">          &#125; else &#123;</span><br><span class="line">            const j = this.list.findIndex((val) =&gt; (from.name === val))</span><br><span class="line">            if (j !== -1) &#123;</span><br><span class="line">              this.$delete(this.list, j)</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        immediate: true</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>end.vue</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">goIndexPage() &#123;  // 返回</span><br><span class="line">  EventBus.$emit(&apos;clearRoute&apos;, &apos;Start&apos;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          HMS
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="http://yoursite.com/2019/08/30/20190830/" title="20190830" target="_blank">http://yoursite.com/2019/08/30/20190830/</a>
+        </li>
+        <li>
+          <strong>版权声明： </strong>
+          本博客所有文章除特别声明外，均采用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow" target="_blank">Apache License 2.0</a> 许可协议。转载请注明出处！
+        </li>
+      </ul>
+    </div>
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+    
+
+    
+
+    
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2019/08/30/20190830/" target="_blank">20190830</a>
-  
-    </h1>
-  
+      </div>
+    </span>
+  </div>
+</div>
 
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/30/20190830/" alt="微信分享二维码"> -->
+    </div>
+</div>
 
-        <div class="article-info info-on-right">
-          
-          
+<div class="mask js-mask"></div>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+    
+    <div class="clearfix"></div>
+  </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2019/08/26/hello-world/" class="archive-article-date">
-        <time datetime="2019-08-26T02:36:19.386Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-26</time>
-</a>
 
+
+<nav id="article-nav">
+  
+  
+    <a href="/2019/08/26/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hello World</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2019/08/26/hello-world/" target="_blank">Hello World</a>
-  
-    </h1>
-  
+        
+        
+    </div>
+</aside>
 
 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
-    
+
+
+
+
+
+
+
+
 
 
           </div>
@@ -290,8 +390,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
