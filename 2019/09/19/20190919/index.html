@@ -6,17 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>HMS的学习笔记</title>
+  <title>20190919 | HMS的学习笔记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta property="og:type" content="article">
-<meta property="og:title" content="HMS的学习笔记">
+  <meta name="description" content="下文为HMS当日整理的ruijinbeiyuan项目中的一些问题">
+<meta name="keywords" content="ruijinbeiyuan">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20190919">
 <meta property="og:url" content="http://yoursite.com/2019/09/19/20190919/index.html">
 <meta property="og:site_name" content="HMS的学习笔记">
+<meta property="og:description" content="下文为HMS当日整理的ruijinbeiyuan项目中的一些问题">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-09-19T10:33:32.951Z">
+<meta property="og:updated_time" content="2019-09-19T10:47:09.354Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HMS的学习笔记">
+<meta name="twitter:title" content="20190919">
+<meta name="twitter:description" content="下文为HMS当日整理的ruijinbeiyuan项目中的一些问题">
   
     <link rel="alternative" href="/atom.xml" title="HMS的学习笔记" type="application/atom+xml">
   
@@ -174,9 +178,50 @@
             <article id="post-20190919" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
+      <header class="article-header">
+  
+  
+    <h1 class="article-title" itemprop="name">
+      20190919
+    </h1>
+  
+
+
+  
+  
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/2019/09/19/20190919/" class="archive-article-date">
+        <time datetime="2019-09-19T10:34:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-19</time>
+</a>
+
+  
+  
+  </header>
+  
   <div class="article-entry" itemprop="articleBody">
     
-    
+    <p>下文为HMS当日整理的ruijinbeiyuan项目中的一些问题</p>
+<a id="more"></a>
+
+<h5 id="问题1-在选中字段前展示一个小三角"><a href="#问题1-在选中字段前展示一个小三角" class="headerlink" title="问题1 在选中字段前展示一个小三角"></a>问题1 在选中字段前展示一个小三角</h5><h6 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h6><p>1）使用css的伪元素及css画三角形的方法来完成<br>2）注意三角形的定位，使用绝对布局和transform属性完成三角形伪类的垂直居中<br>3）实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">.active&#123;</span><br><span class="line">  position:relative;</span><br><span class="line">  background: #fff;</span><br><span class="line">  padding-left: px2rem(25);</span><br><span class="line">  &amp;:before&#123;</span><br><span class="line">    content: &apos;&apos;;</span><br><span class="line">    width: 0;</span><br><span class="line">    height: 0;</span><br><span class="line">    border: 4px solid transparent;</span><br><span class="line">    border-left-color: #0F76FF;</span><br><span class="line">    position: absolute;</span><br><span class="line">    left: px2rem(10);</span><br><span class="line">    top: 50%;</span><br><span class="line">    transform: translate(0, -4px);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="问题2-如何用更好的方法实现两个大致结构一样，有些许地方不同的组件"><a href="#问题2-如何用更好的方法实现两个大致结构一样，有些许地方不同的组件" class="headerlink" title="问题2 如何用更好的方法实现两个大致结构一样，有些许地方不同的组件"></a>问题2 如何用更好的方法实现两个大致结构一样，有些许地方不同的组件</h5><h6 id="解决方案：-1"><a href="#解决方案：-1" class="headerlink" title="解决方案："></a>解决方案：</h6><p>1）再建立一个基本组件，该组件提供一些slot插槽，满足组件的可变性，只接收数据，不对数据进行处理，减少耦合性<br>2）两个不同页面上需要展示的不同组件通过调用基础组件及自定义插槽内容的方法来实现组件的基本结构一致，减少css的重复代码</p>
+<h5 id="问题3-如何纵向绘制含有title的表格（数据返回格式只支持纵向绘制，title是横向的）"><a href="#问题3-如何纵向绘制含有title的表格（数据返回格式只支持纵向绘制，title是横向的）" class="headerlink" title="问题3 如何纵向绘制含有title的表格（数据返回格式只支持纵向绘制，title是横向的）"></a>问题3 如何纵向绘制含有title的表格（数据返回格式只支持纵向绘制，title是横向的）</h5><h6 id="解决方案：-2"><a href="#解决方案：-2" class="headerlink" title="解决方案："></a>解决方案：</h6><p>1）css的table属性好像不满足，自己乱画…<br>2）边框线的绘制：首先绘制最大的边框，然后绘制title栏的底部边框，其次绘制item表格的右下边框，注意最后一列的右边框不绘制、最后一行的下边框不绘制</p>
+<h5 id="问题4-自定义日历的绘制（极其复杂）"><a href="#问题4-自定义日历的绘制（极其复杂）" class="headerlink" title="问题4 自定义日历的绘制（极其复杂）"></a>问题4 自定义日历的绘制（极其复杂）</h5><h6 id="问题4-1：根据当前日期（开始日期）及获取到的最终日期（结束日期），补全补全开始日期的所在周，结束日期所在周。"><a href="#问题4-1：根据当前日期（开始日期）及获取到的最终日期（结束日期），补全补全开始日期的所在周，结束日期所在周。" class="headerlink" title="问题4.1：根据当前日期（开始日期）及获取到的最终日期（结束日期），补全补全开始日期的所在周，结束日期所在周。"></a>问题4.1：根据当前日期（开始日期）及获取到的最终日期（结束日期），补全补全开始日期的所在周，结束日期所在周。</h6><h6 id="问题4-2：按照月份绘制日期，月末月初留白。"><a href="#问题4-2：按照月份绘制日期，月末月初留白。" class="headerlink" title="问题4.2：按照月份绘制日期，月末月初留白。"></a>问题4.2：按照月份绘制日期，月末月初留白。</h6><h6 id="问题4-3：点击某一天，获取到当前周，并做标记。选中周实现圆角展示（复杂）。"><a href="#问题4-3：点击某一天，获取到当前周，并做标记。选中周实现圆角展示（复杂）。" class="headerlink" title="问题4.3：点击某一天，获取到当前周，并做标记。选中周实现圆角展示（复杂）。"></a>问题4.3：点击某一天，获取到当前周，并做标记。选中周实现圆角展示（复杂）。</h6><h6 id="问题4-4：根据当天上下午的排班状态判断出当天的排班状态并显示"><a href="#问题4-4：根据当天上下午的排班状态判断出当天的排班状态并显示" class="headerlink" title="问题4.4：根据当天上下午的排班状态判断出当天的排班状态并显示"></a>问题4.4：根据当天上下午的排班状态判断出当天的排班状态并显示</h6><h6 id="解决方案：-3"><a href="#解决方案：-3" class="headerlink" title="解决方案："></a>解决方案：</h6><p>1）（问题4.1）获取日期所在周的周一和周末</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">getMonday(dd) &#123;</span><br><span class="line">  var week = dd.getDay(); //获取时间的星期数</span><br><span class="line">  var minus = week ? week - 1 : 6;</span><br><span class="line">  dd.setDate(dd.getDate() - minus); //获取minus天前的日期</span><br><span class="line">  return dd;</span><br><span class="line">&#125;,</span><br><span class="line">getSunday(dd) &#123;</span><br><span class="line">  var week = dd.getDay(); //获取时间的星期数</span><br><span class="line">  var minus = week ? 7 - week : 0;</span><br><span class="line">  dd.setDate(dd.getDate() + minus); //获取minus天前的日期</span><br><span class="line">  return dd;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2）（问题4.2）计算（新）开始日期和（新）结束日期的时间差，循环遍历生成日期<br>3）在循环过程中判断当前月是否存在，若存在，则push该日期，若不存在，则创建该月的数组，判断当前月一号位于周几，push n-1个空白项，再push当前日期<br>4）循环月份，循环月份中的日期数据，绘制日历<br>5）（问题4.3）在遍历日历数组的时候，加上yearWeek（第几周）字段；同时，在遍历日期数据的时候，创建一个以yearWeek为key的weekList对象。<br>6）选中某日期时，根据该日期的yearWeek得到weekList中对应周的数组（输出）。<br>7）判断日历中yearWeek是否跟selectYearWeek一致，添加被选中项的背景色<br>8）选中周圆角的实现：不多说，直接上代码（参考ionic的绘制方法）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/*一行的最后一个 or 月份的最后一个*/</span><br><span class="line">.active:nth-child(7n), .active.isLast &#123;</span><br><span class="line">  border-top-right-radius: 4px;</span><br><span class="line">  border-bottom-right-radius: 4px;</span><br><span class="line">&#125;</span><br><span class="line">/*一行的第一个 or 月份的第一个*/</span><br><span class="line">.active:nth-child(7n+1), .active.isFirst &#123;</span><br><span class="line">  border-top-left-radius: 4px;</span><br><span class="line">  border-bottom-left-radius: 4px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>9）（问题4.4）已知排班状态是预约1 &gt; 已满2 &gt; 停诊3 &gt; 无排班4，首先设置以日期为key的数组，先默认当前日期内的排班状态state为4，在遍历排班数据时，若存在比默认状态小的状态码，则更新状态码，可实现预约1 &gt; 已满2 &gt; 停诊3 &gt; 无排班4<br>10）日历组件上根据状态码的不同现实不同的字段和颜色</p>
+<h5 id="问题5-选中周的数据在页面表格中的展示"><a href="#问题5-选中周的数据在页面表格中的展示" class="headerlink" title="问题5 选中周的数据在页面表格中的展示"></a>问题5 选中周的数据在页面表格中的展示</h5><h6 id="问题5-1：根据获取数据，转换为目标数组：以日期、上下午为key"><a href="#问题5-1：根据获取数据，转换为目标数组：以日期、上下午为key" class="headerlink" title="问题5.1：根据获取数据，转换为目标数组：以日期、上下午为key"></a>问题5.1：根据获取数据，转换为目标数组：以日期、上下午为key</h6><h6 id="问题5-2：输出选中周的数组，展示上下午的排班状态"><a href="#问题5-2：输出选中周的数组，展示上下午的排班状态" class="headerlink" title="问题5.2：输出选中周的数组，展示上下午的排班状态"></a>问题5.2：输出选中周的数组，展示上下午的排班状态</h6><h6 id="解决方案：-4"><a href="#解决方案：-4" class="headerlink" title="解决方案："></a>解决方案：</h6><p>1）（问题5.1）就转换数据喽，上下午的判断通过正则表达式来判断，说实话不用也行吧…<br>正则表达式如下：<code>/\d{1,2}(?=\:\d{1,2}\-)/</code><br>2）（问题5.2）上下午的排班状态同问题4.4。在问题4.4的解决过程中，同时添加morningState和afternoonState的状态码，处理同上。<br>3）展示到表格上。</p>
+<h5 id="问题6-由于数据是在日历弹出框中处理并默认选中某一周展示到父组件页面中的，所以要先展示日历弹出框，使其能够正常处理数据并展示数据给父组件（一周排班）页面。那么问题来了，如何能够让用户对弹框的展示和消失无感知。（进入该页面应该是不显示日历弹出框的）"><a href="#问题6-由于数据是在日历弹出框中处理并默认选中某一周展示到父组件页面中的，所以要先展示日历弹出框，使其能够正常处理数据并展示数据给父组件（一周排班）页面。那么问题来了，如何能够让用户对弹框的展示和消失无感知。（进入该页面应该是不显示日历弹出框的）" class="headerlink" title="问题6 由于数据是在日历弹出框中处理并默认选中某一周展示到父组件页面中的，所以要先展示日历弹出框，使其能够正常处理数据并展示数据给父组件（一周排班）页面。那么问题来了，如何能够让用户对弹框的展示和消失无感知。（进入该页面应该是不显示日历弹出框的）"></a>问题6 由于数据是在日历弹出框中处理并默认选中某一周展示到父组件页面中的，所以要先展示日历弹出框，使其能够正常处理数据并展示数据给父组件（一周排班）页面。那么问题来了，如何能够让用户对弹框的展示和消失无感知。（进入该页面应该是不显示日历弹出框的）</h5><h6 id="解决方案：-5"><a href="#解决方案：-5" class="headerlink" title="解决方案："></a>解决方案：</h6><p>1）设置一个hideSchedulePanel字段，首先隐藏日历弹出框组件（display：none），在得到数据后，再设置hideSchedulePanel显示组件<br>2）注意在关闭日历弹框之后，延迟一秒显示整个组件，否则会出现闪现页面遮罩层。</p>
+
     
 
     
@@ -190,7 +235,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="http://yoursite.com/2019/09/19/20190919/" title="" target="_blank">http://yoursite.com/2019/09/19/20190919/</a>
+          <a href="http://yoursite.com/2019/09/19/20190919/" title="20190919" target="_blank">http://yoursite.com/2019/09/19/20190919/</a>
         </li>
         <li>
           <strong>版权声明： </strong>
@@ -204,6 +249,17 @@
   <div class="article-info article-info-index">
     
     
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ruijinbeiyuan</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
     
 
     
@@ -414,6 +470,10 @@
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ruijinbeiyuan</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
